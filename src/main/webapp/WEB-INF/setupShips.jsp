@@ -3,13 +3,25 @@
 <html>
 <head>
     <title>BattleShip - setup your ships</title>
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
 <form action="/setup" method="post">
     <table>
+        <tr>
+            <td></td>
+            <c:forEach items="A,B,C,D,E,F,G,H,I,J" var="col">
+                <td>${col}</td>
+            </c:forEach>
+        </tr>
         <c:forEach begin="1" end="10" var="row">
             <tr>
+                <td>${row}</td>
                 <c:forEach items="A,B,C,D,E,F,G,H,I,J" var="col">
                     <td>
                         <c:set var="addr" value="${col}${row}"/>
