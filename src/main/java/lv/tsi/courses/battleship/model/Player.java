@@ -20,4 +20,8 @@ public class Player {
     public Field getEnemyField() {
         return enemyField;
     }
+
+    public boolean isReadyToPlay() {
+        return ownField.isValid();
+    }
 }

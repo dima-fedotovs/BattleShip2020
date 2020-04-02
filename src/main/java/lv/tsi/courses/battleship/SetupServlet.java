@@ -17,15 +17,21 @@ public class SetupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] selected = request.getParameterValues("cells");
 
+        var player = (Player) request.getSession().getAttribute("player");
+
+        player.getOwnField().clear();
+
         if (selected != null) {
             System.out.println(Arrays.toString(selected));
-            var player = (Player) request.getSession().getAttribute("player");
             for (String addr : selected) {
                 player.getOwnField().setState(addr, CellState.SHIP);
             }
         }
 
-        if (selected == null || selected.length != 20) {
+        if (player.getOwnField().isValid()) {
+            response.sendRedirect("/waitSetup");
+        } else {
+            request.setAttribute("message", "wrong placement!");
             request.getRequestDispatcher("/WEB-INF/setupShips.jsp").include(request, response);
         }
 

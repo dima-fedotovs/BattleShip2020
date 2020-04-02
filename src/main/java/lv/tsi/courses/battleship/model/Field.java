@@ -13,4 +13,14 @@ public class Field {
     public void setState(String addr, CellState state) {
         cells.put(addr, state);
     }
+
+    public void clear() {
+        cells.clear();
+    }
+
+    public boolean isValid() {
+        return cells.values().stream()
+            .filter(s -> s == CellState.SHIP)
+            .count() == 20;
+    }
 }
