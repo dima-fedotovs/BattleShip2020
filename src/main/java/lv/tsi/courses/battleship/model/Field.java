@@ -21,6 +21,6 @@ public class Field {
     public boolean isValid() {
         return cells.values().stream()
             .filter(s -> s == CellState.SHIP)
-            .count() == 20;
+            .count() > 0 ;
     }
 }

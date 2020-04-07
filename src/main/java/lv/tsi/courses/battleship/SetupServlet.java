@@ -1,6 +1,7 @@
 package lv.tsi.courses.battleship;
 
 import lv.tsi.courses.battleship.model.CellState;
+import lv.tsi.courses.battleship.model.Game;
 import lv.tsi.courses.battleship.model.Player;
 
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class SetupServlet extends HttpServlet {
         }
 
         if (player.getOwnField().isValid()) {
-            response.sendRedirect("/waitSetup");
+            doGet(request, response);
         } else {
             request.setAttribute("message", "wrong placement!");
             request.getRequestDispatcher("/WEB-INF/setupShips.jsp").include(request, response);
@@ -39,8 +40,15 @@ public class SetupServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO insert logic to check state, whether everything is ready to setup ships.
-        request.getRequestDispatcher("/WEB-INF/setupShips.jsp").include(request, response);
+        var player = (Player) request.getSession().getAttribute("player");
+        var game = (Game) request.getSession().getAttribute("game");
+        if (!player.getOwnField().isValid()) {
+            request.getRequestDispatcher("/WEB-INF/setupShips.jsp").include(request, response);
+        } else if (game.getPlayer1().isReadyToPlay() && game.getPlayer2().isReadyToPlay()) {
+            response.sendRedirect("/game");
+        } else {
+            request.getRequestDispatcher("/WEB-INF/waitSetup.jsp").include(request, response);
+        }
     }
 
 }

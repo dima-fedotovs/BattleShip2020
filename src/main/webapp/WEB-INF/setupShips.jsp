@@ -3,11 +3,7 @@
 <html>
 <head>
     <title>BattleShip - setup your ships</title>
-    <style>
-        td {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 

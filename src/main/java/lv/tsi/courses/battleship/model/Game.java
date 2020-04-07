@@ -15,4 +15,12 @@ public class Game {
     public boolean isReady() {
         return player1 != null && player2 != null;
     }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
 }
