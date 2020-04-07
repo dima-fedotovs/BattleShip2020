@@ -23,4 +23,8 @@ public class Field {
             .filter(s -> s == CellState.SHIP)
             .count() > 0 ;
     }
+
+    public boolean hasShips() {
+        return cells.containsValue(CellState.SHIP);
+    }
 }
