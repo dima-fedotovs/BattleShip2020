@@ -5,6 +5,7 @@ public class Game {
     private Player player2;
     private boolean isPlayer1Turn = true;
     private Player winner;
+    private boolean gameOver;
 
     public synchronized void join(Player player) {
         if (player1 == null) {
@@ -78,4 +79,11 @@ public class Game {
         return winner;
     }
 
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
 }
